@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             filePathTxt = new TextBox();
             backBtn = new Button();
             nextBtn = new Button();
@@ -38,6 +39,7 @@
             label4 = new Label();
             iconList = new ImageList(components);
             listView1 = new ListView();
+            lblMessage = new Label();
             SuspendLayout();
             // 
             // filePathTxt
@@ -55,6 +57,7 @@
             backBtn.TabIndex = 1;
             backBtn.Text = "Back";
             backBtn.UseVisualStyleBackColor = true;
+            backBtn.Click += backBtn_Click;
             // 
             // nextBtn
             // 
@@ -62,54 +65,64 @@
             nextBtn.Name = "nextBtn";
             nextBtn.Size = new Size(75, 23);
             nextBtn.TabIndex = 2;
-            nextBtn.Text = "Next";
+            nextBtn.Text = "Open";
             nextBtn.UseVisualStyleBackColor = true;
             nextBtn.Click += nextBtn_Click;
             // 
             // fileNameLbl
             // 
             fileNameLbl.AutoSize = true;
-            fileNameLbl.Location = new Point(74, 367);
+            fileNameLbl.Location = new Point(79, 370);
             fileNameLbl.Name = "fileNameLbl";
-            fileNameLbl.Size = new Size(57, 15);
+            fileNameLbl.Size = new Size(74, 15);
             fileNameLbl.TabIndex = 4;
-            fileNameLbl.Text = "FileName";
+            fileNameLbl.Text = "Not Selected";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(172, 367);
+            label2.Location = new Point(10, 370);
             label2.Name = "label2";
-            label2.Size = new Size(22, 15);
+            label2.Size = new Size(63, 15);
             label2.TabIndex = 5;
-            label2.Text = "---";
+            label2.Text = "File Name:";
             // 
             // fileTypeLbl
             // 
             fileTypeLbl.AutoSize = true;
-            fileTypeLbl.Location = new Point(642, 380);
+            fileTypeLbl.Location = new Point(79, 406);
             fileTypeLbl.Name = "fileTypeLbl";
-            fileTypeLbl.Size = new Size(49, 15);
+            fileTypeLbl.Size = new Size(74, 15);
             fileTypeLbl.TabIndex = 6;
-            fileTypeLbl.Text = "FileType";
+            fileTypeLbl.Text = "Not Selected";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(726, 380);
+            label4.Location = new Point(10, 406);
             label4.Name = "label4";
-            label4.Size = new Size(22, 15);
+            label4.Size = new Size(55, 15);
             label4.TabIndex = 7;
-            label4.Text = "---";
+            label4.Text = "File Type:";
             // 
             // iconList
             // 
             iconList.ColorDepth = ColorDepth.Depth32Bit;
-            iconList.ImageSize = new Size(16, 16);
+            iconList.ImageStream = (ImageListStreamer)resources.GetObject("iconList.ImageStream");
             iconList.TransparentColor = Color.Transparent;
+            iconList.Images.SetKeyName(0, "audio.ico");
+            iconList.Images.SetKeyName(1, "excel.ico");
+            iconList.Images.SetKeyName(2, "folder.ico");
+            iconList.Images.SetKeyName(3, "pdf.ico");
+            iconList.Images.SetKeyName(4, "unknown.ico");
+            iconList.Images.SetKeyName(5, "video.ico");
+            iconList.Images.SetKeyName(6, "word.ico");
+            iconList.Images.SetKeyName(7, "Yellowicon-Flat-Unknown.256.png");
+            iconList.Images.SetKeyName(8, "Hopstarter-Sleek-Xp-Basic-Folder.256.png");
             // 
             // listView1
             // 
+            listView1.Font = new Font("Segoe UI", 12F);
             listView1.LargeImageList = iconList;
             listView1.Location = new Point(10, 41);
             listView1.Name = "listView1";
@@ -118,12 +131,23 @@
             listView1.TabIndex = 8;
             listView1.UseCompatibleStateImageBehavior = false;
             listView1.ItemSelectionChanged += listView1_ItemSelectionChanged;
+            listView1.DoubleClick += listView1_DoubleClick;
+            // 
+            // lblMessage
+            // 
+            lblMessage.AutoSize = true;
+            lblMessage.Location = new Point(387, 370);
+            lblMessage.Name = "lblMessage";
+            lblMessage.Size = new Size(0, 15);
+            lblMessage.TabIndex = 9;
+            lblMessage.Visible = false;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblMessage);
             Controls.Add(listView1);
             Controls.Add(label4);
             Controls.Add(fileTypeLbl);
@@ -150,5 +174,6 @@
         private Label label4;
         private ImageList iconList;
         private ListView listView1;
+        private Label lblMessage;
     }
 }
