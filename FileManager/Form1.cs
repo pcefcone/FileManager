@@ -1,10 +1,10 @@
-using System.IO;
+//using System.IO;
 
 namespace FileManager
 {
     public partial class Form1 : Form
     {
-        private string filePath = "C:";
+        private string filePath = "D:";
         private bool isFile = false;
         private string currentlySelectedItemName = "";
         public Form1()
@@ -16,29 +16,44 @@ namespace FileManager
         private void Form1_Load(object sender, EventArgs e)
         {
             filePathTxt.Text = filePath;
-            LoadFilesAndDerictories();
+            LoadFilesAndDirectories();
         }
 
-        public void LoadFilesAndDerictories()
+        public void LoadFilesAndDirectories()
         {
             DirectoryInfo fileList;
+            fileList = new DirectoryInfo(filePath);
+            FileInfo[] files = fileList.GetFiles();  // GET ALL THE FILES
+            DirectoryInfo[] directories = fileList.GetDirectories();    // GET ALL THE DIRECTORIES
             try
             {
-                fileList = new DirectoryInfo(filePath);
-                FileInfo[] files = fileList.GetFiles();  // GET ALL THE FILES
-                DirectoryInfo[] derictories = fileList.GetDirectories();    // GET ALL THE DERICTORIES
-                for(int =0 )
+
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    listView1.Items.Add(files[i].Name);
+                }
             }
             catch (Exception e)
             {
-
             }
+
+            try
+            {
+                for (int i = 0; i < directories.Length; i++)
+                {
+                    listView1.Items.Add(directories[i].Name);
+                }
+            }
+            catch (Exception e)
+            {
+            }
+
         }
 
         public void LoadButtonAction()
         {
             filePath = filePathTxt.Text;
-            LoadFilesAndDerictories();
+            LoadFilesAndDirectories();
             isFile = false;
         }
 
@@ -47,9 +62,20 @@ namespace FileManager
             LoadButtonAction();
         }
 
-        private void listView1_SelectedIndexChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void listView1_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             currentlySelectedItemName = e.Item.Text;
+            FileAttributes fileAttributes = File.GetAttributes(currentlySelectedItemName);
+
+            if((fileAttributes & FileAttributes.Directory) == FileAttributes.Directory)
+            {
+                isFile = false;
+                filePathTxt.Text = currentlySelectedItemName;
+            }
+            else
+            {
+                isFile = true; 
+            }
         }
     }
 }

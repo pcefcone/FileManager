@@ -117,7 +117,7 @@
             listView1.SmallImageList = iconList;
             listView1.TabIndex = 8;
             listView1.UseCompatibleStateImageBehavior = false;
-            listView1.SelectedIndexChanged += listView1_SelectedIndexChanged;
+            listView1.ItemSelectionChanged += listView1_ItemSelectionChanged;
             // 
             // Form1
             // 
